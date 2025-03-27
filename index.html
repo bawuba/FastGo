@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FastGo - Motorcycle Transport & Delivery | Ghana</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- Google Maps API -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap"
+      async
+      defer
+    ></script>
+
+    <style>
+      /* ===== GLOBAL STYLES ===== */
+      :root {
+        --primary: #ff6b00; /* FastGo Orange */
+        --primary-light: #ff9e4d;
+        --primary-dark: #e05d00;
+        --light: #f8f9fa;
+        --dark: #343a40;
+        --darker: #1e2227;
+        --white: #ffffff;
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+        --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        --border-radius: 12px;
+        --border-radius-lg: 20px;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f5f7fa;
+        color: var(--dark);
+        line-height: 1.7;
+        overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 700;
+        line-height: 1.3;
+      }
+
+      a {
+        transition: var(--transition);
+        text-decoration: none;
+      }
+
+      .btn {
+        font-weight: 600;
+        padding: 0.75rem 1.75rem;
+        border-radius: 50px;
+        transition: var(--transition);
+        min-width: 200px;
+        letter-spacing: 0.5px;
+        border: none;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        background-image: linear-gradient(
+          to right,
+          var(--primary),
+          var(--primary-dark)
+        );
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-dark);
+        background-image: linear-gradient(
+          to right,
+          var(--primary-dark),
+          var(--primary)
+        );
+      }
+
+      .btn-outline-light:hover {
+        color: var(--primary) !important;
+        background-color: var(--white);
+      }
+
+      .section-title {
+        position: relative;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+        text-align: center;
+      }
+
+      .section-title:after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        width: 80px;
+        height: 4px;
+        background: var(--primary);
+        border-radius: 2px;
+      }
+
+      .text-primary {
+        color: var(--primary) !important;
+      }
+
+      /* ===== NAVBAR ===== */
+      .navbar {
+        box-shadow: var(--shadow);
+        padding: 1rem 1.5rem;
+        background: var(--white) !important;
+        transition: all 0.4s ease;
+      }
+
+      .navbar.scrolled {
+        padding: 0.75rem 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.8rem;
+        color: var(--primary) !important;
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar-brand i {
+        margin-right: 10px;
+        font-size: 1.5rem;
+      }
+
+      .nav-link {
+        font-weight: 500;
+        padding: 0.5rem 1rem !important;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        color: var(--dark) !important;
+        border-radius: 50px;
+        margin: 0.2rem 0;
+      }
+
+      .nav-link i {
+        margin-right: 8px;
+        font-size: 0.9rem;
+      }
+
+      .nav-link:hover {
+        color: var(--primary) !important;
+        background-color: rgba(255, 107, 0, 0.1);
+      }
+
+      .navbar-toggler {
+        border: none;
+        padding: 0.5rem;
+      }
+
+      .navbar-toggler:focus {
+        box-shadow: none;
+      }
+
+      /* ===== HERO SECTION ===== */
+      .hero-section {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: var(--white);
+        padding: 200px 0 120px;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero-section h1 {
+        font-size: 3.2rem;
+        margin-bottom: 20px;
+        font-weight: 800;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .hero-section p {
+        font-size: 1.25rem;
+        max-width: 700px;
+        margin: 0 auto 30px;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        opacity: 0.9;
+      }
+
+      .hero-buttons .btn {
+        margin: 0.5rem;
+      }
+
+      /* ===== BOOKING SECTION ===== */
+      .booking-section {
+        background: var(--white);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-lg);
+        padding: 2.5rem;
+        margin: -60px auto 4rem;
+        max-width: 850px;
+        position: relative;
+        z-index: 1;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .booking-section h3 {
+        margin-bottom: 1.5rem;
+        color: var(--primary);
+        text-align: center;
+        font-weight: 700;
+      }
+
+      .booking-input {
+        padding: 1rem 1.5rem;
+        border-radius: 50px;
+        border: 1px solid #e0e0e0;
+        transition: var(--transition);
+      }
+
+      .booking-input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 0.25rem rgba(255, 107, 0, 0.25);
+      }
+
+      /* ===== MAP SECTION ===== */
+      .map-section {
+        padding: 100px 0;
+        background-color: var(--white);
+      }
+
+      #map {
+        height: 500px;
+        width: 100%;
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .map-controls {
+        background: var(--white);
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        margin-bottom: 2rem;
+      }
+
+      /* ===== SERVICES SECTION ===== */
+      .services-section {
+        padding: 100px 0;
+        background-color: var(--white);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .service-card {
+        background: var(--white);
+        border-radius: var(--border-radius);
+        padding: 2.5rem 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        text-align: center;
+        height: 100%;
+        border-top: 4px solid var(--primary);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          to bottom right,
+          rgba(255, 107, 0, 0.1),
+          rgba(255, 107, 0, 0.05)
+        );
+        z-index: -1;
+        opacity: 0;
+        transition: var(--transition);
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .service-card:hover::before {
+        opacity: 1;
+      }
+
+      .service-card i {
+        font-size: 2.75rem;
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        background: rgba(255, 107, 0, 0.1);
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        border-radius: 50%;
+        text-align: center;
+      }
+
+      .service-card h3 {
+        color: var(--primary);
+        margin-bottom: 1.25rem;
+      }
+
+      .service-card p {
+        margin-bottom: 1.5rem;
+      }
+
+      .features-list {
+        list-style: none;
+        padding-left: 0;
+        text-align: left;
+      }
+
+      .features-list li {
+        margin-bottom: 0.8rem;
+        padding-left: 30px;
+        position: relative;
+      }
+
+      .features-list li:before {
+        content: "\f00c";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+      }
+
+      /* ===== ABOUT SECTION ===== */
+      .about-section {
+        padding: 100px 0;
+        background-color: var(--light);
+        position: relative;
+      }
+
+      .about-content {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .about-text {
+        flex: 1;
+      }
+
+      .about-img {
+        flex: 1;
+        border-radius: var(--border-radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        transition: var(--transition);
+      }
+
+      .about-img:hover {
+        transform: scale(1.02);
+      }
+
+      .about-img img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: var(--transition);
+      }
+
+      .about-img:hover img {
+        transform: scale(1.05);
+      }
+
+      .mission-box {
+        background: var(--white);
+        padding: 2rem;
+        border-radius: var(--border-radius);
+        margin-bottom: 30px;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        border-left: 4px solid var(--primary);
+      }
+
+      .mission-box:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .mission-box h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1.25rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .mission-box h3 i {
+        margin-right: 12px;
+      }
+
+      /* ===== HOW IT WORKS ===== */
+      .how-it-works-section {
+        padding: 100px 0;
+        background-color: var(--white);
+      }
+
+      .step-card {
+        text-align: center;
+        padding: 2.5rem 2rem;
+        transition: var(--transition);
+      }
+
+      .step-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .step-icon {
+        font-size: 3.5rem;
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        background: rgba(255, 107, 0, 0.1);
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        border-radius: 50%;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .step-number {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        background: var(--primary);
+        color: var(--white);
+        border-radius: 50%;
+        font-weight: bold;
+        line-height: 50px;
+        margin-bottom: 1.5rem;
+        font-size: 1.25rem;
+        box-shadow: 0 4px 10px rgba(255, 107, 0, 0.3);
+      }
+
+      /* ===== REGISTRATION SECTION ===== */
+      .registration-section {
+        padding: 100px 0;
+        background-color: var(--light);
+      }
+
+      .registration-card {
+        background: var(--white);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--shadow-lg);
+        padding: 3rem;
+        margin-bottom: 2rem;
+        transition: var(--transition);
+      }
+
+      .registration-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .registration-card h3 {
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        text-align: center;
+      }
+
+      .form-control {
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        transition: var(--transition);
+      }
+
+      .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 0.25rem rgba(255, 107, 0, 0.1);
+      }
+
+      .form-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      /* ===== CONTACT SECTION ===== */
+      .contact-section {
+        padding: 100px 0;
+        background-color: var(--white);
+      }
+
+      .contact-card {
+        background: var(--white);
+        padding: 2.5rem;
+        border-radius: var(--border-radius);
+        height: 100%;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        border-left: 4px solid var(--primary);
+      }
+
+      .contact-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .contact-card i {
+        color: var(--primary);
+        margin-right: 10px;
+        font-size: 1.25rem;
+      }
+
+      .contact-card h4 {
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+      }
+
+      /* ===== FOOTER ===== */
+      .footer {
+        background-color: var(--darker);
+        color: var(--white);
+        padding: 70px 0 30px;
+        position: relative;
+      }
+
+      .footer::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--primary);
+      }
+
+      .footer h4 {
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 15px;
+      }
+
+      .footer h4::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--primary);
+      }
+
+      .footer-links li {
+        margin-bottom: 0.75rem;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+        transition: var(--transition);
+      }
+
+      .footer-links a:hover {
+        color: var(--primary);
+        padding-left: 5px;
+      }
+
+      .social-icons a {
+        color: var(--white);
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        margin-right: 10px;
+        transition: var(--transition);
+      }
+
+      .social-icons a:hover {
+        background: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 20px;
+        margin-top: 40px;
+      }
+
+      /* ===== CHATBOT ===== */
+      .chatbot-container {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1000;
+      }
+
+      .chatbot-button {
+        background-color: var(--primary);
+        color: var(--white);
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(255, 107, 0, 0.4);
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .chatbot-button:hover {
+        transform: scale(1.1) rotate(10deg);
+      }
+
+      .chatbot-button i {
+        font-size: 1.75rem;
+      }
+
+      .chatbot-button::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: var(--primary);
+        z-index: -1;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.7;
+        }
+        100% {
+          transform: scale(1.5);
+          opacity: 0;
+        }
+      }
+
+      .chatbot-window {
+        width: 380px;
+        background: var(--white);
+        border-radius: var(--border-radius-lg);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        overflow: hidden;
+        display: none;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+      }
+
+      .chatbot-header {
+        background: linear-gradient(
+          to right,
+          var(--primary),
+          var(--primary-dark)
+        );
+        color: var(--white);
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .chatbot-header h3 {
+        margin: 0;
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+      }
+
+      .chatbot-header h3 i {
+        margin-right: 10px;
+      }
+
+      .chatbot-close {
+        background: none;
+        border: none;
+        color: var(--white);
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: var(--transition);
+        padding: 0 0.5rem;
+      }
+
+      .chatbot-close:hover {
+        transform: rotate(90deg);
+      }
+
+      .chatbot-messages {
+        height: 350px;
+        padding: 20px;
+        overflow-y: auto;
+        background: #f9f9f9;
+      }
+
+      .message {
+        margin-bottom: 15px;
+        max-width: 80%;
+        padding: 12px 18px;
+        border-radius: 18px;
+        line-height: 1.5;
+        font-size: 14px;
+        position: relative;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .bot-message {
+        background: #e6e6e6;
+        color: #333;
+        border-top-left-radius: 5px;
+        align-self: flex-start;
+      }
+
+      .user-message {
+        background: var(--primary);
+        color: var(--white);
+        border-top-right-radius: 5px;
+        align-self: flex-end;
+        margin-left: auto;
+      }
+
+      .chatbot-input {
+        display: flex;
+        padding: 15px;
+        background: var(--white);
+        border-top: 1px solid #eee;
+      }
+
+      .chatbot-input input {
+        flex: 1;
+        padding: 12px 18px;
+        border: 1px solid #ddd;
+        border-radius: 50px;
+        outline: none;
+        font-size: 14px;
+        transition: var(--transition);
+      }
+
+      .chatbot-input input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 0.25rem rgba(255, 107, 0, 0.1);
+      }
+
+      .chatbot-input button {
+        background: var(--primary);
+        color: var(--white);
+        border: none;
+        border-radius: 50%;
+        width: 45px;
+        height: 45px;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .chatbot-input button:hover {
+        background: var(--primary-dark);
+        transform: rotate(15deg);
+      }
+
+      .typing-indicator {
+        display: flex;
+        padding: 12px 18px;
+        background: #e6e6e6;
+        border-radius: 18px;
+        width: fit-content;
+        margin-bottom: 15px;
+      }
+
+      .typing-indicator span {
+        height: 10px;
+        width: 10px;
+        background: #999;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0 3px;
+        animation: typing 1s infinite;
+      }
+
+      .typing-indicator span:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .typing-indicator span:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes typing {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      /* ===== BACK TO TOP BUTTON ===== */
+      .back-to-top {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: var(--primary);
+        color: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        transition: var(--transition);
+        opacity: 0;
+        visibility: hidden;
+        z-index: 999;
+      }
+
+      .back-to-top.active {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        background: var(--primary-dark);
+        transform: translateY(-3px);
+      }
+
+      /* ===== RESPONSIVE STYLES ===== */
+      @media (max-width: 992px) {
+        .hero-section h1 {
+          font-size: 2.8rem;
+        }
+
+        .hero-section p {
+          font-size: 1.1rem;
+        }
+
+        .about-content {
+          flex-direction: column;
+        }
+
+        .about-img {
+          margin-top: 40px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-section {
+          padding: 150px 0 100px;
+          background-attachment: scroll;
+        }
+
+        .hero-section h1 {
+          font-size: 2.4rem;
+        }
+
+        .hero-section p {
+          font-size: 1rem;
+        }
+
+        .booking-section {
+          padding: 2rem 1.5rem;
+          margin: -40px auto 3rem;
+        }
+
+        #map {
+          height: 400px;
+        }
+
+        .btn {
+          min-width: 160px;
+          padding: 0.65rem 1.25rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .chatbot-window {
+          width: 320px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .hero-section h1 {
+          font-size: 2rem;
+        }
+
+        .navbar-brand {
+          font-size: 1.5rem;
+        }
+
+        .service-card,
+        .mission-box,
+        .contact-card {
+          padding: 1.75rem 1.5rem;
+        }
+
+        #map {
+          height: 300px;
+        }
+
+        .chatbot-container {
+          bottom: 20px;
+          right: 20px;
+        }
+
+        .chatbot-button {
+          width: 60px;
+          height: 60px;
+        }
+
+        .chatbot-window {
+          width: 300px;
+          right: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-motorcycle"></i>FastGo
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#home">
+                <i class="fas fa-home"></i> Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services">
+                <i class="fas fa-concierge-bell"></i> Services
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#map-section">
+                <i class="fas fa-map-marked-alt"></i> Live Map
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">
+                <i class="fas fa-info-circle"></i> About
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#how-it-works">
+                <i class="fas fa-play"></i> How It Works
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#register">
+                <i class="fas fa-user-plus"></i> Register
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">
+                <i class="fas fa-phone-alt"></i> Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="container">
+        <div data-aos="fade-up" data-aos-duration="1000">
+          <h1>Fast Motorcycle Transport & Delivery</h1>
+          <h3 class="mb-4">Your Reliable Ride & Courier Solution in Ghana</h3>
+          <p>
+            Book affordable motorcycle rides or fast delivery services across
+            Accra. Our professional riders are ready to serve you 24/7.
+          </p>
+          <div class="hero-buttons mt-4">
+            <a
+              href="#map-section"
+              class="btn btn-primary btn-lg me-3 mb-3"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <i class="fas fa-map-marked-alt me-2"></i> View Live Map
+            </a>
+            <a
+              href="#register"
+              class="btn btn-outline-light btn-lg mb-3"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <i class="fas fa-user-plus me-2"></i> Register Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking Section -->
+    <div class="container">
+      <section
+        class="booking-section"
+        data-aos="fade-up"
+        data-aos-duration="800"
+      >
+        <h3>Where would you like to go?</h3>
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <input
+              type="text"
+              id="destination"
+              placeholder="Enter your destination"
+              class="form-control form-control-lg booking-input mb-4"
+            />
+            <div class="text-center">
+              <button class="btn btn-primary mx-2 mb-2">
+                <i class="fas fa-motorcycle me-2"></i> Book a Ride
+              </button>
+              <button class="btn btn-primary mx-2 mb-2">
+                <i class="fas fa-motorcycle me-2"></i> Request Delivery
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Map Section -->
+    <section class="map-section" id="map-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Live Tracking Map</h2>
+        <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+          Real-time tracking of riders and delivery locations
+        </p>
+
+        <div class="map-controls" data-aos="fade-up" data-aos-delay="200">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="pickup-location" class="form-label"
+                >Pickup Location</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="pickup-location"
+                placeholder="Enter pickup address"
+              />
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="dropoff-location" class="form-label"
+                >Drop-off Location</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="dropoff-location"
+                placeholder="Enter drop-off address"
+              />
+            </div>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-primary me-2" id="find-route">
+              <i class="fas fa-route me-2"></i> Find Route
+            </button>
+            <button class="btn btn-outline-primary" id="track-rider">
+              <i class="fas fa-motorcycle me-2"></i> Track Rider
+            </button>
+          </div>
+        </div>
+
+        <div id="map" data-aos="fade-up" data-aos-delay="300"></div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Our Services</h2>
+        <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+          Fast, reliable transportation solutions tailored to your needs
+        </p>
+
+        <div class="row">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-card">
+              <i class="fas fa-motorcycle"></i>
+              <h3>Motorcycle Rides</h3>
+              <p>
+                Beat the traffic with our fast and affordable motorcycle rides.
+                Perfect for quick trips across the city with professional
+                riders.
+              </p>
+              <ul class="features-list mt-3">
+                <li>24/7 availability</li>
+                <li>GPS-tracked rides</li>
+                <li>Safety helmets provided</li>
+                <li>Affordable pricing</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-card">
+              <i class="fas fa-motorcycle"></i>
+              <h3>Motorcycle Delivery</h3>
+              <p>
+                Fast and secure delivery of packages by motorcycle. We handle
+                your items with care and deliver quickly through Accra's
+                traffic.
+              </p>
+              <ul class="features-list mt-3">
+                <li>Same-day motorcycle delivery</li>
+                <li>Package tracking</li>
+                <li>Business solutions</li>
+                <li>Secure motorcycle couriers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">About FastGo</h2>
+
+        <div class="about-content">
+          <div class="about-text">
+            <div class="mission-box" data-aos="fade-up" data-aos-delay="100">
+              <h3>
+                <i class="fas fa-bullseye me-2 text-primary"></i> Our Mission
+              </h3>
+              <p>
+                FastGo was founded in 2020 with a simple mission: to transform
+                urban mobility in Ghana by providing safe, reliable, and
+                affordable motorcycle transport and delivery services. We're
+                committed to solving transportation challenges while creating
+                employment opportunities for professional riders.
+              </p>
+            </div>
+
+            <div class="mission-box" data-aos="fade-up" data-aos-delay="200">
+              <h3>
+                <i class="fas fa-check-circle me-2 text-primary"></i> Why Choose
+                Us
+              </h3>
+              <ul class="features-list">
+                <li>Professional, trained riders with background checks</li>
+                <li>24/7 availability for all your transport needs</li>
+                <li>Competitive pricing with no hidden fees</li>
+                <li>Real-time tracking for all rides and deliveries</li>
+                <li>Safety-first approach with quality helmets</li>
+                <li>Quick response times and reliable service</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="about-img" data-aos="fade-left" data-aos-delay="300">
+            <img
+              src="https://images.unsplash.com/photo-1591637333184-19aa84b3e01f?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
+              alt="FastGo motorcycle riders"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section" id="how-it-works">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">How FastGo Works</h2>
+        <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+          Get your ride or delivery in just a few simple steps
+        </p>
+
+        <div
+          id="howItWorksCarousel"
+          class="carousel slide"
+          data-bs-ride="carousel"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#howItWorksCarousel"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#howItWorksCarousel"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#howItWorksCarousel"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#howItWorksCarousel"
+              data-bs-slide-to="3"
+              aria-label="Slide 4"
+            ></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <div class="step-card">
+                <div class="step-number">1</div>
+                <i class="fas fa-map-marked-alt step-icon"></i>
+                <h3>Enter Details</h3>
+                <p>
+                  Open the FastGo app and enter your destination or delivery
+                  details.
+                </p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="step-card">
+                <div class="step-number">2</div>
+                <i class="fas fa-mobile-alt step-icon"></i>
+                <h3>Choose Service</h3>
+                <p>
+                  Select between motorcycle ride or courier service based on
+                  your needs.
+                </p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="step-card">
+                <div class="step-number">3</div>
+                <i class="fas fa-motorcycle step-icon"></i>
+                <h3>Match With Rider</h3>
+                <p>
+                  Our system finds the nearest available rider for your selected
+                  service.
+                </p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <div class="step-card">
+                <div class="step-number">4</div>
+                <i class="fas fa-check-circle step-icon"></i>
+                <h3>Confirm & Go</h3>
+                <p>
+                  Review details, confirm your request, and your rider arrives
+                  promptly.
+                </p>
+              </div>
+            </div>
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#howItWorksCarousel"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#howItWorksCarousel"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section class="registration-section" id="register">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Join FastGo</h2>
+        <p class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+          Register as a rider or customer to get started
+        </p>
+
+        <div class="row">
+          <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="registration-card">
+              <h3>
+                <i class="fas fa-user me-2 text-primary"></i> Customer
+                Registration
+              </h3>
+              <form>
+                <div class="mb-3">
+                  <label for="customerName" class="form-label">Full Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="customerName"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="customerEmail" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="customerEmail"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="customerPhone" class="form-label"
+                    >Phone Number</label
+                  >
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="customerPhone"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="customerPassword" class="form-label"
+                    >Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="customerPassword"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                  Register as Customer
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="registration-card">
+              <h3>
+                <i class="fas fa-motorcycle me-2 text-primary"></i> Rider
+                Registration
+              </h3>
+              <form>
+                <div class="mb-3">
+                  <label for="riderName" class="form-label">Full Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="riderName"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="riderEmail" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="riderEmail"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="riderPhone" class="form-label"
+                    >Phone Number</label
+                  >
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="riderPhone"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="riderLicense" class="form-label"
+                    >Driver's License Number</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="riderLicense"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="riderPassword" class="form-label">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="riderPassword"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                  Register as Rider
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-4" data-aos="fade-up" data-aos-delay="400">
+          <p>
+            Already have an account?
+            <a href="#login" class="text-primary">Login here</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Contact FastGo</h2>
+
+        <div class="row">
+          <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="contact-card">
+              <h4><i class="fas fa-phone-alt me-2"></i> Call or WhatsApp Us</h4>
+              <p class="mb-4">
+                <a href="tel:+233550519631" class="text-dark"
+                  >+233 550 519 631</a
+                >
+              </p>
+              <a
+                href="https://wa.me/233550519631"
+                class="btn btn-primary"
+                target="_blank"
+              >
+                <i class="fab fa-whatsapp me-2"></i> Chat on WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <div class="col-lg-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="contact-card">
+              <h4><i class="fas fa-map-marker-alt me-2"></i> Visit Us</h4>
+              <p class="mb-4">123 Transport Avenue<br />Accra, Ghana</p>
+
+              <h4><i class="fas fa-clock me-2"></i> Working Hours</h4>
+              <p>Monday - Sunday: 6:00 AM - 10:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
+            <h4 class="mb-4">FastGo</h4>
+            <p>
+              Ghana's premier motorcycle transport and delivery service,
+              providing fast, reliable, and affordable mobility solutions.
+            </p>
+            <div class="social-icons mt-4">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+            <h4 class="mb-4">Services</h4>
+            <ul class="list-unstyled footer-links">
+              <li><a href="#">Motorcycle Rides</a></li>
+              <li><a href="#">Motorcycle Delivery</a></li>
+              <li><a href="#">Business Solutions</a></li>
+              <li><a href="#">VIP Transport</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+            <h4 class="mb-4">Company</h4>
+            <ul class="list-unstyled footer-links">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Press</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <h4 class="mb-4">Quick Links</h4>
+            <ul class="list-unstyled footer-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#map-section">Live Map</a></li>
+              <li><a href="#register">Register</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="row">
+            <div class="col-md-6 mb-3 mb-md-0">
+              <p class="mb-0">&copy; 2024 FastGo. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+              <a href="#" class="me-3">Terms of Service</a>
+              <a href="#">Privacy Policy</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+      <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+          <h3><i class="fas fa-robot me-2"></i>FastGo Assistant</h3>
+          <button class="chatbot-close" id="chatbotClose">&times;</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+          <div class="message bot-message">
+            Hello! I'm your FastGo assistant. How can I help you today? 😊
+          </div>
+        </div>
+        <div class="chatbot-input">
+          <input
+            type="text"
+            id="chatbotInput"
+            placeholder="Type your message..."
+          />
+          <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+      <div class="chatbot-button" id="chatbotButton">
+        <i class="fas fa-comments"></i>
+      </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+      // Initialize AOS animation library
+      AOS.init({
+        duration: 800,
+        easing: "ease-in-out",
+        once: true,
+      });
+
+      // Google Maps Implementation
+      let map;
+      let directionsService;
+      let directionsRenderer;
+      let markers = [];
+
+      function initMap() {
+        // Default to Accra, Ghana
+        const accra = { lat: 5.6037, lng: -0.187 };
+
+        // Initialize the map
+        map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 12,
+          center: accra,
+          mapTypeId: "roadmap",
+          styles: [
+            {
+              featureType: "poi",
+              stylers: [{ visibility: "off" }],
+            },
+            {
+              featureType: "transit",
+              elementType: "labels.icon",
+              stylers: [{ visibility: "off" }],
+            },
+          ],
+        });
+
+        // Initialize services
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer({
+          map: map,
+          suppressMarkers: true,
+        });
+
+        // Add custom markers for riders (simulated)
+        addSimulatedRiders();
+
+        // Initialize autocomplete for location inputs
+        const pickupInput = document.getElementById("pickup-location");
+        const dropoffInput = document.getElementById("dropoff-location");
+
+        const pickupAutocomplete = new google.maps.places.Autocomplete(
+          pickupInput
+        );
+        const dropoffAutocomplete = new google.maps.places.Autocomplete(
+          dropoffInput
+        );
+
+        // Event listeners for buttons
+        document
+          .getElementById("find-route")
+          .addEventListener("click", findRoute);
+        document
+          .getElementById("track-rider")
+          .addEventListener("click", trackNearestRider);
+      }
+
+      function addSimulatedRiders() {
+        // Clear existing markers
+        clearMarkers();
+
+        // Add some simulated riders around Accra
+        const riderLocations = [
+          { lat: 5.6037, lng: -0.187, name: "Rider 1" },
+          { lat: 5.6137, lng: -0.197, name: "Rider 2" },
+          { lat: 5.5937, lng: -0.177, name: "Rider 3" },
+          { lat: 5.6237, lng: -0.167, name: "Rider 4" },
+        ];
+
+        riderLocations.forEach((location, index) => {
+          const marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            icon: {
+              url: "https://maps.google.com/mapfiles/ms/icons/motorcycling.png",
+              scaledSize: new google.maps.Size(40, 40),
+            },
+            title: location.name,
+          });
+
+          // Add info window
+          const infoWindow = new google.maps.InfoWindow({
+            content: `<strong>${location.name}</strong><br>Available for pickup`,
+          });
+
+          marker.addListener("click", () => {
+            infoWindow.open(map, marker);
+          });
+
+          markers.push(marker);
+        });
+      }
+
+      function clearMarkers() {
+        markers.forEach((marker) => marker.setMap(null));
+        markers = [];
+      }
+
+      function findRoute() {
+        const pickup = document.getElementById("pickup-location").value;
+        const dropoff = document.getElementById("dropoff-location").value;
+
+        if (!pickup || !dropoff) {
+          alert("Please enter both pickup and drop-off locations");
+          return;
+        }
+
+        directionsService.route(
+          {
+            origin: pickup,
+            destination: dropoff,
+            travelMode: "DRIVING",
+          },
+          (response, status) => {
+            if (status === "OK") {
+              directionsRenderer.setDirections(response);
+
+              // Add custom markers for start and end points
+              const route = response.routes[0];
+              const startLocation = route.legs[0].start_location;
+              const endLocation = route.legs[0].end_location;
+
+              new google.maps.Marker({
+                position: startLocation,
+                map: map,
+                icon: {
+                  url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
+                },
+                title: "Pickup Location",
+              });
+
+              new google.maps.Marker({
+                position: endLocation,
+                map: map,
+                icon: {
+                  url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                },
+                title: "Drop-off Location",
+              });
+            } else {
+              alert("Directions request failed due to " + status);
+            }
+          }
+        );
+      }
+
+      function trackNearestRider() {
+        const pickup = document.getElementById("pickup-location").value;
+
+        if (!pickup) {
+          alert("Please enter your pickup location");
+          return;
+        }
+
+        // In a real app, this would find the nearest rider from your backend
+        // Here we just simulate finding the first rider
+        alert("Nearest rider found! Tracking their location on the map.");
+
+        // Center map on the first rider (simulated)
+        if (markers.length > 0) {
+          map.setCenter(markers[0].getPosition());
+          map.setZoom(15);
+        }
+      }
+
+      // Initialize when DOM is loaded
+      document.addEventListener("DOMContentLoaded", function () {
+        // Navbar scroll effect
+        const navbar = document.querySelector(".navbar");
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+          }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+              window.scrollTo({
+                top: target.offsetTop - 70,
+                behavior: "smooth",
+              });
+            }
+          });
+        });
+
+        // Back to top button
+        const backToTopButton = document.querySelector(".back-to-top");
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 300) {
+            backToTopButton.classList.add("active");
+          } else {
+            backToTopButton.classList.remove("active");
+          }
+        });
+
+        // Chatbot functionality
+        const chatbotButton = document.getElementById("chatbotButton");
+        const chatbotWindow = document.getElementById("chatbotWindow");
+        const chatbotClose = document.getElementById("chatbotClose");
+        const chatbotMessages = document.getElementById("chatbotMessages");
+        const chatbotInput = document.getElementById("chatbotInput");
+        const chatbotSend = document.getElementById("chatbotSend");
+
+        // Toggle chatbot window
+        chatbotButton.addEventListener("click", function () {
+          chatbotWindow.style.display =
+            chatbotWindow.style.display === "block" ? "none" : "block";
+        });
+
+        chatbotClose.addEventListener("click", function () {
+          chatbotWindow.style.display = "none";
+        });
+
+        // Send message function
+        function sendMessage() {
+          const message = chatbotInput.value.trim();
+          if (message === "") return;
+
+          // Add user message
+          addMessage(message, "user");
+          chatbotInput.value = "";
+
+          // Show typing indicator
+          const typingIndicator = document.createElement("div");
+          typingIndicator.className = "typing-indicator";
+          typingIndicator.innerHTML = "<span></span><span></span><span></span>";
+          chatbotMessages.appendChild(typingIndicator);
+          chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+          // Simulate bot response after delay
+          setTimeout(function () {
+            // Remove typing indicator
+            chatbotMessages.removeChild(typingIndicator);
+
+            // Generate bot response
+            const botResponse = generateBotResponse(message);
+            addMessage(botResponse, "bot");
+          }, 1000 + Math.random() * 2000);
+        }
+
+        // Add message to chat
+        function addMessage(text, sender) {
+          const messageDiv = document.createElement("div");
+          messageDiv.className = `message ${sender}-message`;
+          messageDiv.textContent = text;
+          chatbotMessages.appendChild(messageDiv);
+          chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        // Generate bot responses
+        function generateBotResponse(userMessage) {
+          const lowerMessage = userMessage.toLowerCase();
+
+          // Greetings
+          if (
+            lowerMessage.includes("hi") ||
+            lowerMessage.includes("hello") ||
+            lowerMessage.includes("hey")
+          ) {
+            return "Hello there! How can I assist you with FastGo services today?";
+          }
+
+          // Services
+          if (
+            lowerMessage.includes("service") ||
+            lowerMessage.includes("offer") ||
+            lowerMessage.includes("provide")
+          ) {
+            return "FastGo offers motorcycle rides and courier delivery services. Which one are you interested in?";
+          }
+
+          // Ride booking
+          if (
+            lowerMessage.includes("ride") ||
+            lowerMessage.includes("motorcycle") ||
+            lowerMessage.includes("okada")
+          ) {
+            return "To book a motorcycle ride, simply enter your destination and tap 'Book a Ride'. Our rider will arrive shortly!";
+          }
+
+          // Delivery
+          if (
+            lowerMessage.includes("deliver") ||
+            lowerMessage.includes("courier") ||
+            lowerMessage.includes("package")
+          ) {
+            return "For delivery services, tap 'Request Delivery' and provide pickup/destination details. We'll handle your items with care!";
+          }
+
+          // Pricing
+          if (
+            lowerMessage.includes("price") ||
+            lowerMessage.includes("cost") ||
+            lowerMessage.includes("how much")
+          ) {
+            return "Prices vary based on distance and service type. Enter your locations to see estimated fares. We offer competitive rates!";
+          }
+
+          // Safety
+          if (
+            lowerMessage.includes("safe") ||
+            lowerMessage.includes("helmet") ||
+            lowerMessage.includes("accident")
+          ) {
+            return "Safety is our priority! All riders are trained and provide helmets. We ensure safe transport for all our customers.";
+          }
+
+          // Contact
+          if (
+            lowerMessage.includes("contact") ||
+            lowerMessage.includes("call") ||
+            lowerMessage.includes("whatsapp")
+          ) {
+            return "You can call or WhatsApp us at +233 550 519 631. Our team is available daily from 6AM to 10PM.";
+          }
+
+          // Registration
+          if (
+            lowerMessage.includes("register") ||
+            lowerMessage.includes("sign up") ||
+            lowerMessage.includes("account")
+          ) {
+            return "You can register as a customer or rider on our website. Scroll down to the 'Join FastGo' section or click 'Register' in the menu.";
+          }
+
+          // Map
+          if (
+            lowerMessage.includes("map") ||
+            lowerMessage.includes("track") ||
+            lowerMessage.includes("location")
+          ) {
+            return "You can view our live tracking map to see available riders and track your delivery. Click on 'Live Map' in the menu or the map button on the homepage.";
+          }
+
+          // Default response
+          const defaultResponses = [
+            "I'm here to help with FastGo services. Could you tell me more about what you need?",
+            "I can help you book rides, arrange deliveries, or answer questions about FastGo. What would you like to know?",
+            "For quick assistance, you can also call our support line at +233 550 519 631.",
+            "I'm still learning! Could you rephrase your question about our services?",
+          ];
+
+          return defaultResponses[
+            Math.floor(Math.random() * defaultResponses.length)
+          ];
+        }
+
+        // Send message on button click or Enter key
+        chatbotSend.addEventListener("click", sendMessage);
+        chatbotInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            sendMessage();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
